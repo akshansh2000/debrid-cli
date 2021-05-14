@@ -70,7 +70,15 @@ def unrestrict_link(hoster_link: str) -> str:
     """
     unrestricts hoster link and generates download link
     """
-    pass
+    response = json.loads(
+        post(
+            f"{BASE_URL}/unrestrict/link",
+            headers=AUTH_HEADERS,
+            data={"link": hoster_link},
+        ).text
+    )
+
+    return response["download"]
 
 
 def ask_user(choices: list) -> dict:
