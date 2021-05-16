@@ -96,3 +96,13 @@ def ask_user(choices: list) -> dict:
     ).ask()
 
     return choices[indices[choice]]
+
+
+if __name__ == "__main__":
+    get_torrents_list()
+    torrent_selection = ask_user(TORRENTS_LIST)
+    files_list = get_files_list(torrent_selection["id"])
+    file_selection = ask_user(files_list)
+    file_link = unrestrict_link(file_selection["hoster_link"])
+
+    os.system(f'$TERMINAL -e mpv {file_link}')
