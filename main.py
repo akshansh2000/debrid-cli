@@ -11,7 +11,7 @@ import os
 import sys
 import json
 
-from requests import get, post, exceptions
+from requests import get, post
 from questionary import rawselect
 
 
@@ -28,7 +28,7 @@ def get_torrents_list() -> None:
     retrieve list of torrents from debrid (max: 100)
     """
     response = json.loads(
-        get(f"{BASE_URL}/torrents", headers=AUTH_HEADERS).text
+        get(f"{BASE_URL}/torrents?limit=36", headers=AUTH_HEADERS).text
     )
 
     global TORRENTS_LIST
@@ -85,16 +85,14 @@ def ask_user(choices: list) -> dict:
     """
     prompts user to select an option
     """
-    pass
+    indices = dict()
 
+    for index, item in enumerate(choices):
+        indices[item["name"]] = index
 
-"""
-get torrents list
-display torrent names
-select torrent
-get files list
-display files which were selected while adding
-select file
-unrestrict link
-play in default media player
-"""
+    choice = rawselect(
+        "What do you want to watch?",
+        choices=[file_info["name"] for file_info in choices],
+    ).ask()
+
+    return choices[indices[choice]]
