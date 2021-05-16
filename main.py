@@ -12,7 +12,7 @@ import sys
 import json
 
 from requests import get, post
-from questionary import rawselect
+from questionary import select
 
 
 BASE_URL = "https://api.real-debrid.com/rest/1.0"
@@ -28,7 +28,7 @@ def get_torrents_list() -> None:
     retrieve list of torrents from debrid (max: 100)
     """
     response = json.loads(
-        get(f"{BASE_URL}/torrents?limit=36", headers=AUTH_HEADERS).text
+        get(f"{BASE_URL}/torrents?limit=50", headers=AUTH_HEADERS).text
     )
 
     global TORRENTS_LIST
@@ -90,7 +90,7 @@ def ask_user(choices: list) -> dict:
     for index, item in enumerate(choices):
         indices[item["name"]] = index
 
-    choice = rawselect(
+    choice = select(
         "What do you want to watch?",
         choices=[file_info["name"] for file_info in choices],
     ).ask()
