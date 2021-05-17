@@ -95,14 +95,30 @@ def ask_user(choices: list) -> dict:
         choices=[file_info["name"] for file_info in choices],
     ).ask()
 
+    if not choice:
+        print("Exiting...")
+        sys.exit(1)
+
     return choices[indices[choice]]
 
 
-if __name__ == "__main__":
-    get_torrents_list()
+def repeat():
+    """
+    ask user for choice until exit
+    """
+    os.system("clear")
+
     torrent_selection = ask_user(TORRENTS_LIST)
     files_list = get_files_list(torrent_selection["id"])
     file_selection = ask_user(files_list)
     file_link = unrestrict_link(file_selection["hoster_link"])
 
-    os.system(f'$TERMINAL -e mpv {file_link}')
+    os.system(f'mpv {file_link}')
+
+
+if __name__ == "__main__":
+    os.system("clear")
+    get_torrents_list()
+
+    while True:
+        repeat()
