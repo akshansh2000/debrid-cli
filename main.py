@@ -35,7 +35,7 @@ def get_torrents_list() -> None:
     TORRENTS_LIST = [{
         "id": torrent['id'],
         "name": torrent['filename'],
-    } for torrent in response]
+    } for torrent in response if torrent["status"] == "downloaded"]
 
 
 def get_files_list(torrent_id: str) -> list:
