@@ -28,7 +28,7 @@ def get_torrents_list() -> None:
     retrieve list of torrents from debrid (max: 100)
     """
     response = json.loads(
-        get(f"{BASE_URL}/torrents?limit=50", headers=AUTH_HEADERS).text
+        get(f"{BASE_URL}/torrents?limit=100", headers=AUTH_HEADERS).text
     )
 
     global TORRENTS_LIST

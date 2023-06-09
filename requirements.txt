@@ -1,8 +1,8 @@
-certifi==2020.12.5
-chardet==4.0.0
-idna==2.10
-prompt-toolkit==3.0.18
-questionary==1.9.0
-requests==2.25.1
-urllib3==1.26.4
+certifi==2023.5.7
+charset-normalizer==3.1.0
+idna==3.4
+prompt-toolkit==3.0.33
+questionary==1.10.0
+requests==2.31.0
+urllib3==2.0.3
 wcwidth==0.2.5
